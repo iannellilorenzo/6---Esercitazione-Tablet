@@ -10,10 +10,8 @@ class Program
 
         int[] punteggi = new int[5];
 
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < 5; i++)
         {
-            Console.Clear();
-
             Console.WriteLine($"Tablet numero {i + 1}: ");
             Console.Write("Inserire la marca: ");
             string marca = Console.ReadLine();
@@ -21,29 +19,36 @@ class Program
             Console.Write("Inserire la velocita' in GHz (x,y): ");
             double valGHz = double.Parse(Console.ReadLine());
 
-            Console.Write("Inserire la dimensione dello schermo in pollici (x, y): ");
+            Console.Write("Inserire la dimensione dello schermo in pollici (x,y): ");
             double dimPol = double.Parse(Console.ReadLine());
 
-            Console.Write("Inserire la capacita' della batteria in mAh (x, y): ");
+            Console.Write("Inserire la capacita' della batteria in mAh: ");
             double durBatmAh = double.Parse(Console.ReadLine());
 
             tabl[i] = new Tablet(marca, valGHz, dimPol, durBatmAh);
+            
+            Console.Clear();
         }
 
         foreach (var tablet in tabl)
         {
-            Console.WriteLine($"Punteggio tablet numero {index + 1}");
+            Console.WriteLine($"Punteggio tablet numero {index + 1}:");
             var tupla = tablet.Punteggio(tablet);
-            Console.WriteLine($"Punteggio velocita' processore: {tupla.Item1}; Punteggio dimensioni schermo: {tupla.Item2}; Punteggio capacita' batteria: {tupla.Item3}.");
-            
+            Console.WriteLine($"Punteggio velocita' processore: {tupla.Item1}; Punteggio dimensioni schermo: {tupla.Item2}; Punteggio capacita' batteria: {tupla.Item3}.\n");
+
             punteggi[index] = tupla.Item1 + tupla.Item2 + tupla.Item3;
-
-
-
-
 
             index++;
         }
+
+        int puntMax = punteggi.Max();
+        int puntMin = punteggi.Min();
+
+        Console.WriteLine($"Il miglior punteggio è: {puntMax}; ottenuto dal tablet: {Array.IndexOf(punteggi, puntMax) + 1}");
+        Console.WriteLine($"Il peggior punteggio è: {puntMin}; ottenuto dal tablet: {Array.IndexOf(punteggi, puntMin) + 1}");
+
+        Console.CursorVisible = false;
+        Console.ReadKey();
     }
 }
 
