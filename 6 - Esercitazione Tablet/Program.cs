@@ -3,7 +3,7 @@
 class Program
 {
     static void Main()
-    { 
+    {
         Tablet[] tabl = new Tablet[5];
 
         for (int i = 0; i < tabl.Length; i++)
@@ -26,8 +26,10 @@ class Program
             tabl[i] = new Tablet(marca, valGHz, dimPol, durBatmAh);
         }
 
+        foreach (var tablet in tabl)
+        {
 
-
+        }
     }
 }
 
@@ -78,5 +80,12 @@ class Tablet
         set { _durBatmAh = value; }
     }
 
+    public (int, int, int) Punteggio(Tablet tab)
+    {
+        decimal puntGHz = (Math.Round((decimal)(tab._velGHz / 10), MidpointRounding.AwayFromZero)) * 10;
+        decimal puntPol = Math.Round((decimal)(tab._dimPol / 10), MidpointRounding.AwayFromZero);
+        decimal puntmAh = Math.Round((decimal)(tab._durBatmAh / 1000), MidpointRounding.AwayFromZero);
 
+        return ((int)puntGHz, (int)puntPol, (int)(puntmAh));
+    }
 }
